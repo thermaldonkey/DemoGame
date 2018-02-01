@@ -1,9 +1,12 @@
 #include "Sprite.h"
+#include "../Engine.h"
 
 Sprite::Sprite()
 {
 	xPos = 0;
 	yPos = 0;
+	rot = 0;
+	speed = 100;
 	texture = Texture();
 }
 
@@ -11,6 +14,8 @@ Sprite::Sprite(string imagePath)
 {
 	xPos = 0;
 	yPos = 0;
+	rot = 0;
+	speed = 100;
 	texture = Texture(imagePath);
 }
 
@@ -18,12 +23,14 @@ Sprite::Sprite(string imagePath, float _xPos, float _yPos)
 {
 	xPos = _xPos;
 	yPos = _yPos;
+	rot = 0;
+	speed = 100;
 	texture = Texture(imagePath);
 }
 
 void Sprite::Update()
 {
-
+	
 }
 
 void Sprite::Render()
@@ -34,8 +41,8 @@ void Sprite::Render()
 
 	//Translate -> Rotate -> Scale
 	glTranslatef(xPos, yPos, 0);
-	//glRotate
-	//glScale
+	glRotatef(rot, 0, 0, 1);
+	glScalef(xScale, yScale, 1);
 
 	//Rendering
 	glColor4f(1, 1, 1, 1);
@@ -47,4 +54,68 @@ void Sprite::Render()
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D);
+}
+
+void Sprite::SpeedTo(float x)
+{
+	speed = x;
+}
+
+void Sprite::SpeedBy(float x)
+{
+	speed += x;
+}
+
+void Sprite::MoveTo(float x, float y)
+{
+	xPos = x;
+	yPos = y;
+}
+
+void Sprite::MoveBy(float x, float y)
+{
+	xPos += (x * Engine::GetDT());
+	yPos += (y * Engine::GetDT());
+}
+
+void Sprite::MoveLeft()
+{
+	xPos -= speed * Engine::GetDT();
+}
+
+void Sprite::MoveRight()
+{
+	xPos += speed * Engine::GetDT();
+}
+
+void Sprite::MoveUp()
+{
+	yPos += speed * Engine::GetDT();
+}
+
+void Sprite::MoveDown()
+{
+	yPos -= speed * Engine::GetDT();
+}
+
+void Sprite::RotateTo(float x)
+{
+	rot = x;
+}
+
+void Sprite::RotateBy(float x)
+{
+	rot += x * Engine::GetDT();
+}
+
+void Sprite::SetScale(float x)
+{
+	xScale = x;
+	yScale = x;
+}
+
+void Sprite::SetScale(float x, float y)
+{
+	xScale = x;
+	yScale = y;
 }
