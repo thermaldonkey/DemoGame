@@ -5,7 +5,7 @@
 int Engine::SCREEN_WIDTH = 1024;
 int Engine::SCREEN_HEIGHT = 768;
 GLFWwindow* Engine::window = NULL;
-double Engine::dt = 0;
+float Engine::dt = 0;
 
 Engine::Engine()
 {
@@ -69,7 +69,7 @@ bool Engine::Initialize(const char* windowTitle)
 void Engine::Update()
 {
 	double now = glfwGetTime();
-	dt = (now - lastTime);
+	dt = (float)(now - lastTime);
 	lastTime = now;
 	glfwPollEvents();
 }
@@ -85,7 +85,7 @@ void Engine::EndRender()
 	glfwSwapBuffers(window);
 }
 
-double Engine::GetDT()
+float Engine::GetDT()
 {
 	return dt;
 }
