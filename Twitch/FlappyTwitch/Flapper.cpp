@@ -1,5 +1,7 @@
 #include "Flapper.h"
 
+#include "../Engine/Math/Rect.h"
+
 Flapper::Flapper()
 {
 	flapForce = 750;
@@ -10,7 +12,10 @@ Flapper::Flapper()
 Flapper::Flapper(Sprite _sprite) : Flapper()
 {
 	sprite = _sprite;
-	rb.Initialize(-10, 0.8f, sprite.GetPos(), sprite.GetRot(), sprite.GetScale(), sprite.GetSize());
+
+	Rect boundingRect = Rect();
+	boundingRect.SetSize(*sprite.GetSize() * *sprite.GetScale());
+	rb.Initialize(-10, 0.8f, sprite.GetPos(), sprite.GetRot(), sprite.GetScale(), sprite.GetSize(), boundingRect);
 }
 
 void Flapper::Update()
