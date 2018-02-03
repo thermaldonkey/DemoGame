@@ -19,6 +19,8 @@ public:
 	void Render(Vector3 color);
 
 	void AddForce(Vector3 force);
+	Vector3 GetVelocity();
+	void SetVelocity(Vector3 _velocity);
 
 private:
 	Vector3* pos;

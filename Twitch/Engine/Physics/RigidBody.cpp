@@ -46,17 +46,17 @@ void RigidBody::Render(Vector3 color)
 	glColor4f(color.x, color.y, color.z, 1);
 	glBegin(GL_LINES);
 	{
-		glVertex2i(0, 0);
-		glVertex2i((int)size->x, 0);
+		glVertex2i(-(int)size->x / 2, -(int)size->y / 2);
+		glVertex2i((int)size->x / 2, -(int)size->y / 2);
 
-		glVertex2i((int)size->x, 0);
-		glVertex2i((int)size->x, (int)size->y);
+		glVertex2i((int)size->x / 2, -(int)size->y / 2);
+		glVertex2i((int)size->x / 2, (int)size->y / 2);
 
-		glVertex2i((int)size->x, (int)size->y);
-		glVertex2i(0, (int)size->y);
+		glVertex2i((int)size->x / 2, (int)size->y / 2);
+		glVertex2i(-(int)size->x / 2, (int)size->y / 2);
 
-		glVertex2i(0, (int)size->y);
-		glVertex2i(0, 0);
+		glVertex2i(-(int)size->x / 2, (int)size->y / 2);
+		glVertex2i(-(int)size->x / 2, -(int)size->y / 2);
 	}
 	glEnd();
 }
@@ -64,4 +64,14 @@ void RigidBody::Render(Vector3 color)
 void RigidBody::AddForce(Vector3 force)
 {
 	velocity = velocity + force;
+}
+
+Vector3 RigidBody::GetVelocity()
+{
+	return velocity;
+}
+
+void RigidBody::SetVelocity(Vector3 _velocity)
+{
+	velocity = _velocity;
 }
